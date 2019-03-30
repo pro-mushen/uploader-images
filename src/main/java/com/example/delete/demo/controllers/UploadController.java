@@ -14,11 +14,11 @@ public class UploadController {
 
     WriterImagesService writerImagesService;
 
-    @PostMapping(path = "/upload")
+    @PostMapping(path = "/upload", consumes = "multipart/form-data")
     public String upload(
-            @RequestParam("file") MultipartFile[] image) {
-        writerImagesService.upload(image);
-        return Arrays.toString(image);
+            @RequestParam("file") MultipartFile[] images) {
+        writerImagesService.upload(images);
+        return Arrays.toString(images);
     }
 
 /*    @RequestMapping( value = "/upload")

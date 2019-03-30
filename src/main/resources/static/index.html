@@ -1,20 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 </head>
 <body>
 
-<form action="/upload" enctype="multipart/form-data" method="POST">
+<form id="multiForm" action="/upload" enctype="multipart/form-data" method="POST">
     aaaaaaaaaaaaaaaa<input accept="image/gif, image/jpeg, image/png"
                            class="form-control-file border"
                            id="multipartFiles"
                            multiple
                            name="file"
-                           type="file">
+                           type="file"
+                           @change="multi">
     <input type="submit" value="Upload"> Press here to upload the file!
 </form>
+
+
+<div id="preview">
+    <ul>
+        <li v-for="img in images">
+            <img :src="img.url" alt="image" width="100px" height="100px">
+        </li>
+    </ul>
+</div>
+
+<style>
+    #preview ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        width: 1000px;
+    }
+    
+
+</style>
+
+
+<script>
+    var imgPreview = new Vue({
+        el: '#preview',
+        data: {
+            // здесь хранятся только картинки, сам объект строится в computed и именно он используется в v-for
+            images: []
+        }
+
+        /*        methods: {
+                    multi: function(){
+                        alert("asdasdasd")
+                        var files = document.forms[0]["file"].files
+                        for(var file in files){
+                            images.push({id: 1, url: URL.createObjectURL(file)})
+                        }
+
+                }*/
+    });
+
+    new Vue({
+        el: '#multiForm',
+        methods: {
+            multi: function () {
+
+                var files = document.forms[0]["file"].files
+                for (var i = 0; i < files.length; i++) {
+                    imgPreview.images.push({id: 1, url: URL.createObjectURL(files[i])})
+                }
+            }
+        }
+    });
+
+
+</script>
 
 </body>
 </html>
