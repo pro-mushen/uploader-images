@@ -4,7 +4,6 @@ var imgPreview = new Vue({
         multiImages: [],
         base64Images: [],
         base64Objects: [],
-        synhroBase64: ''
     },
 
     methods: {
@@ -13,9 +12,6 @@ var imgPreview = new Vue({
             this.multiImages = [];
             for (var i = 0; i < files.length; i++) {
                 this.multiImages.push({url: URL.createObjectURL(files[i])});
-                /*var a = '';*/
-                /*console.log("last " + this.getBase64(URL.createObjectURL(files[i])));*/
-
             }
         },
 
@@ -45,15 +41,12 @@ var imgPreview = new Vue({
             var img = document.createElement('img');
             var fileName = file.name;
             img.onload = function (e) {
-
-                /*                while (this.synhroBase64=="Finish"){}*/
-                console.log(this.synhroBase64 + ': ' + "getBase64Inside(url) - после проверки финишь")
                 canvas.height = img.height;
                 canvas.width = img.width;
-                let base = canvas.toDataURL('image/png');
-                console.log(base);
+                let encoded = canvas.toDataURL('image/png');
+                console.log(encoded);
                 console.log(img.name);
-                _this.base64Objects.push({base64: base, name: fileName});
+                _this.base64Objects.push({encoded: encoded, name: fileName});
                 canvas = null;
                 this.synhroBase64 = "Finish"
             };
@@ -62,20 +55,16 @@ var imgPreview = new Vue({
         },
 
         getBase64: function () {
-
             for (var i = 0; i < this.base64Images.length; i++) {
                 this.getBase64Inside(this.base64Images[i])
             }
+        },
 
-            console.log(this.synhroBase64 + ': ' + "getBase64(url) 1")
-            /*while (this.synhroBase64=="Stop"){}*/
-            /*this.synhroBase64 = "Stop"*/
-            console.log(this.synhroBase64 + ': ' + "getBase64(url) 2 ")
-            /*this.getBase64Inside(url)*/
-            /*          while (this.synhroBase64=="Stop"){}*/
-            /*    let result = this.base64;*/
-            /*this.synhroBase64="Start";*/
-            console.log(this.synhroBase64 + ': ' + "getBase64(url) 3")
-        }
+        postBase64: function () {
+            let files = document.getElementById("base64-input").files
+            axios.post('/upload', this.base64Objects, {headers: {'Content-Type': 'application/json'}});
+        },
+
+
     }
 });

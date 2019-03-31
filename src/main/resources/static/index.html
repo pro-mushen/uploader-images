@@ -13,12 +13,10 @@
 <div id="main">
     <H1>Загрузка картинок</H1>
 
-
     <H3>multipart/form-data</H3>
     <input accept="image/gif, image/jpeg, image/png" class="form-control-file border"
            id="multi-input" multiple name="file" type="file" @change="previewMulti">
     <button v-on:click="postMulti">Upload</button>
-
 
     <div id="multi-preview">
         <ul>
@@ -31,7 +29,7 @@
     <H3>Base64 Json</H3>
     <input id="base64-input" class="preview" accept="image/gif, image/jpeg, image/png" multiple name="file" type="file"
            @change="previewBase64">
-    <button v-on:click="postMulti">Upload</button>
+    <button v-on:click="postBase64">Upload</button>
 
     <div id="base64-preview" class="preview">
         <ul>
