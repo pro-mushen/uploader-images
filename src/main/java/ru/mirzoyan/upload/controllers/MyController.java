@@ -1,4 +1,4 @@
-package com.example.delete.demo.controllers;
+package ru.mirzoyan.upload.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 

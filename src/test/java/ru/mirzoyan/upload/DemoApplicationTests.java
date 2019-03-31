@@ -1,4 +1,4 @@
-package com.example.delete.demo;
+package ru.mirzoyan.upload;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

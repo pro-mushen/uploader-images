@@ -1,10 +1,10 @@
-package com.example.delete.demo.services;
+package ru.mirzoyan.upload.services;
 
-import com.example.delete.demo.dao.WriterImagesDao;
-import com.example.delete.demo.dao.pojo.Base64Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mirzoyan.upload.dao.WriterImagesDao;
+import ru.mirzoyan.upload.dao.pojo.Base64Image;
 
 import java.util.Arrays;
 

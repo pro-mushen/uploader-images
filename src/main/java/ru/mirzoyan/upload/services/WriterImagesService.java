@@ -1,7 +1,7 @@
-package com.example.delete.demo.services;
+package ru.mirzoyan.upload.services;
 
-import com.example.delete.demo.dao.pojo.Base64Image;
 import org.springframework.web.multipart.MultipartFile;
+import ru.mirzoyan.upload.dao.pojo.Base64Image;
 
 public interface WriterImagesService {
     void upload(MultipartFile image);
