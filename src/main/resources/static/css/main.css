@@ -1,0 +1,12 @@
+#preview ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    width: 1000px;
+    height: 100px;
+    flex-wrap: wrap;
+}
+
+li {
+    margin: 5px;
+}

@@ -7,18 +7,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-
 @RestController
 public class UploadController {
 
     WriterImagesService writerImagesService;
 
     @PostMapping(path = "/upload", consumes = "multipart/form-data")
-    public String upload(
+    public void upload(
             @RequestParam("file") MultipartFile[] images) {
         writerImagesService.upload(images);
-        return Arrays.toString(images);
     }
 
 /*    @RequestMapping( value = "/upload")
