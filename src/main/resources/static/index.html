@@ -16,25 +16,30 @@
 
     <H3>multipart/form-data</H3>
     <input accept="image/gif, image/jpeg, image/png" class="form-control-file border"
-           id="multi-input" multiple name="file" type="file" @change="multi">
+           id="multi-input" multiple name="file" type="file" @change="previewMulti">
     <button v-on:click="postMulti">Upload</button>
 
 
-    <!-- <form id="multiForm" action="/upload" enctype="multipart/form-data" method="POST">
-     <H3>multipart/form-data</H3>
-     <input accept="image/gif, image/jpeg, image/png" class="form-control-file border"
-            id="multipartFiles" multiple name="file" type="file" @change="multi">
-     <input type="submit" value="Upload">
- </form>-->
+    <div id="multi-preview">
+        <ul>
+            <li v-for="img in multiImages">
+                <img :src="img.url" alt="image" width="100px" height="100px">
+            </li>
+        </ul>
+    </div>
 
+    <H3>Base64 Json</H3>
+    <input id="base64-input" class="preview" accept="image/gif, image/jpeg, image/png" multiple name="file" type="file"
+           @change="previewBase64">
+    <button v-on:click="postMulti">Upload</button>
 
-<div id="preview">
-    <ul>
-        <li v-for="img in images">
-            <img :src="img.url" alt="image" width="100px" height="100px">
-        </li>
-    </ul>
-</div>
+    <div id="base64-preview" class="preview">
+        <ul>
+            <li v-for="img in base64Images">
+                <img :src="img.url" alt="image" width="100px" height="100px">
+            </li>
+        </ul>
+    </div>
 
 </div>
 

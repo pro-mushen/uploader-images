@@ -1,4 +1,4 @@
-#preview ul {
+.preview ul {
     display: flex;
     flex-direction: row;
     list-style-type: none;
