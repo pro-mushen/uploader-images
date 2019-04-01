@@ -35,8 +35,7 @@ public class WriterImagesDaoImp implements WriterImagesDao {
     public void upload(Image image) {
         if (image.getEncoded() != null) {
             uploadBase64(image);
-        }
-        if (image.getUrl() != null) {
+        } else if (image.getUrl() != null) {
             uploadUrl(image);
         }
     }
