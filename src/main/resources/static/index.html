@@ -14,8 +14,8 @@
     <H1>Загрузка картинок</H1>
 
     <H3>multipart/form-data</H3>
-    <input accept="image/gif, image/jpeg, image/png" class="form-control-file border"
-           id="multi-input" multiple name="file" type="file" @change="previewMulti">
+    <input accept="image/gif, image/jpeg, image/png" id="multi-input" 
+                multiple name="file" type="file" @change="previewMulti">
     <button v-on:click="postMulti">Upload</button>
 
     <div id="multi-preview">
@@ -27,8 +27,8 @@
     </div>
 
     <H3>Base64 Json</H3>
-    <input id="base64-input" class="preview" accept="image/gif, image/jpeg, image/png" multiple name="file" type="file"
-           @change="previewBase64">
+    <input id="base64-input" class="preview" accept="image/gif, image/jpeg, image/png" 
+                                multiple name="file" type="file" @change="previewBase64">
     <button v-on:click="postBase64">Upload</button>
 
     <div id="base64-preview" class="preview">
@@ -38,10 +38,23 @@
             </li>
         </ul>
     </div>
+	
+	<H3>URl Json</H3>
+    <input id="url-input" class="preview" name="file" type="text">
+    <button v-on:click="addUrl">Add image</button>
+    <button v-on:click="postUrl">Upload</button>
+
+    <div id="url-preview" class="preview">
+        <ul>
+            <li v-for="img in urlImages">
+                <img :src="img.url" alt="image" width="100px" height="100px">
+            </li>
+        </ul>
+    </div>
 
 </div>
 
-<script src="new.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
