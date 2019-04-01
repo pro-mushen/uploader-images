@@ -19,9 +19,8 @@ var imagePreview = new Vue({
         postMulti: function () {
             let files = document.getElementById("multi-input").files
             var attachment = new FormData
-
             for (var i = 0; i < files.length; i++) {
-                attachment.append('file', files[i])
+                attachment.append('fileMulti', files[i])
             }
             axios.post('/upload', attachment, {headers: {"Content-type": "multipart/form-data"}});
         },

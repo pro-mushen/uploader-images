@@ -4,18 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Base64Image {
+public class Image {
     @JsonProperty("name")
     private String name;
     @JsonProperty("encoded")
     private String encoded;
+    @JsonProperty("url")
+    private String url;
 
-    public Base64Image() {
+    public Image() {
     }
 
-    public Base64Image(String name, String encoded) {
+    public Image(String name, String encoded, String url) {
         this.name = name;
         this.encoded = encoded;
+        this.url = url;
     }
 
     public String getName() {
@@ -32,5 +35,13 @@ public class Base64Image {
 
     public void setEncoded(String encoded) {
         this.encoded = encoded;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
