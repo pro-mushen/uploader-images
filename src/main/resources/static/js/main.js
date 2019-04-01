@@ -4,6 +4,7 @@ var imagePreview = new Vue({
         multiImages: [],
         base64Images: [],
         base64Objects: [],
+        urlImages: [],
     },
 
     methods: {
@@ -52,7 +53,18 @@ var imagePreview = new Vue({
 			_this.base64Objects.push({encoded: reader.result, name: file.image.name});
 		  }
 		  reader.readAsDataURL(file.image);
-		}
+		}, 
+
+        addUrl: function () {
+            let url = document.getElementById("url-input").value
+            this.urlImages.push({url: url});
+        },
+
+        postUrl: function () {
+            axios.post('/upload', this.urlImages, {headers: {'Content-Type': 'application/json'}});
+        },
+
+
 
     }
 });
