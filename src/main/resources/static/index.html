@@ -18,7 +18,7 @@
                 multiple name="file" type="file" @change="previewMulti">
     <button v-on:click="postMulti">Upload</button>
 
-    <div id="multi-preview">
+    <div id="multi-preview" class="preview">
         <ul>
             <li v-for="img in multiImages">
                 <img :src="img.url" alt="image" width="100px" height="100px">
