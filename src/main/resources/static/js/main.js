@@ -1,4 +1,4 @@
-var imgPreview = new Vue({
+var imagePreview = new Vue({
     el: '#main',
     data: {
         multiImages: [],
@@ -7,8 +7,8 @@ var imgPreview = new Vue({
     },
 
     methods: {
-        previewMulti: function () {
-            let files = document.getElementById("multi-input").files
+        previewMulti: function ($event) {
+            let files = $event.target.files
             this.multiImages = [];
             for (var i = 0; i < files.length; i++) {
                 this.multiImages.push({url: URL.createObjectURL(files[i])});
@@ -25,33 +25,14 @@ var imgPreview = new Vue({
             axios.post('/upload', attachment, {headers: {"Content-type": "multipart/form-data"}});
         },
 
-        previewBase64: function () {
-            let files = document.getElementById("base64-input").files
+        previewBase64: function ($event) {
+            let files = $event.target.files
             this.base64Images = [];
             this.base64Objects = [];
             for (var i = 0; i < files.length; i++) {
-                this.base64Images.push({url: URL.createObjectURL(files[i]), name: files[i].name});
+                this.base64Images.push({url: URL.createObjectURL(files[i]), image: files[i]});
             }
             this.getBase64();
-        },
-
-        getBase64Inside: function (file) {
-            var _this = this;
-            var canvas = document.createElement('CANVAS');
-            var img = document.createElement('img');
-            var fileName = file.name;
-            img.onload = function (e) {
-                canvas.height = img.height;
-                canvas.width = img.width;
-                let encoded = canvas.toDataURL('image/png');
-                console.log(encoded);
-                console.log(img.name);
-                _this.base64Objects.push({encoded: encoded, name: fileName});
-                canvas = null;
-                this.synhroBase64 = "Finish"
-            };
-            img.src = file.url;
-
         },
 
         getBase64: function () {
@@ -61,10 +42,17 @@ var imgPreview = new Vue({
         },
 
         postBase64: function () {
-            let files = document.getElementById("base64-input").files
             axios.post('/upload', this.base64Objects, {headers: {'Content-Type': 'application/json'}});
         },
 
+		getBase64Inside: function (file) {
+		  var _this = this;
+		  var reader = new FileReader();
+		  reader.onloadend = function() {
+			_this.base64Objects.push({encoded: reader.result, name: file.image.name});
+		  }
+		  reader.readAsDataURL(file.image);
+		}
 
     }
 });
