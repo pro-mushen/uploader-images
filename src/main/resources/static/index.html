@@ -21,7 +21,9 @@
     <div id="multi-preview" class="preview">
         <ul>
             <li v-for="img in multiImages">
-                <img :src="img.url" alt="image" width="100px" height="100px">
+                <div class="image">
+                    <img :src="img.url" alt="image">
+                </div>  
             </li>
         </ul>
     </div>
@@ -34,7 +36,9 @@
     <div id="base64-preview" class="preview">
         <ul>
             <li v-for="img in base64Images">
-                <img :src="img.url" alt="image" width="100px" height="100px">
+                <div class="image">
+                    <img :src="img.url" alt="image">
+                </div>
             </li>
         </ul>
     </div>
@@ -47,7 +51,9 @@
     <div id="url-preview" class="preview">
         <ul>
             <li v-for="img in urlImages">
-                <img :src="img.url" alt="image" width="100px" height="100px">
+                <div class="image">
+                    <img :src="img.url" alt="image">
+                </div>
             </li>
         </ul>
     </div>
