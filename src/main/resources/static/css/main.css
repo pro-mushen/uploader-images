@@ -3,10 +3,30 @@
     flex-direction: row;
     list-style-type: none;
     width: 1000px;
-    height: 100px;
     flex-wrap: wrap;
 }
 
 li {
     margin: 5px;
+    border: solid 1px #A9A9A9;
+}
+
+img {
+  display: block;
+  max-width:100px;
+  max-height:100px;
+  width: auto;
+  height: auto;
+
+  margin: auto;
+
+
+}
+
+.image {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  vertical-align: center;
+
 }
