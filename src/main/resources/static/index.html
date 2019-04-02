@@ -16,7 +16,7 @@
     <H3>multipart/form-data</H3>
     <input accept="image/gif, image/jpeg, image/png" id="multi-input" 
                 multiple name="file" type="file" @change="previewMulti">
-    <button v-on:click="postMulti">Upload</button>
+    <button @click="postMulti">Upload</button>
 
     <div id="multi-preview" class="preview">
         <ul>
@@ -31,7 +31,7 @@
     <H3>Base64 Json</H3>
     <input id="base64-input" class="preview" accept="image/gif, image/jpeg, image/png" 
                                 multiple name="file" type="file" @change="previewBase64">
-    <button v-on:click="postBase64">Upload</button>
+    <button @click="postBase64">Upload</button>
 
     <div id="base64-preview" class="preview">
         <ul>
@@ -45,8 +45,8 @@
 	
 	<H3>URl Json</H3>
     <input id="url-input" class="preview" name="file" type="text">
-    <button v-on:click="addUrl">Add image</button>
-    <button v-on:click="postUrl">Upload</button>
+    <button @click="addUrl">Add image</button>
+    <button @click="postUrl">Upload</button>
 
     <div id="url-preview" class="preview">
         <ul>

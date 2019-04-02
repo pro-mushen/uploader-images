@@ -62,8 +62,5 @@ var imagePreview = new Vue({
         postUrl: function () {
             axios.post('/upload', this.urlImages, {headers: {'Content-Type': 'application/json'}});
         },
-
-
-
     }
 });

@@ -14,6 +14,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Repository
@@ -21,11 +23,12 @@ public class WriterImagesDaoImp implements WriterImagesDao {
     @Value("${upload.path}")
     private String pathUpload;
 
+    private Set<String> setImages = new HashSet<>();
+
     @Override
     public void upload(MultipartFile image) {
-        File dirUpload = getDirUpload();
         try {
-            image.transferTo(new File(dirUpload.getAbsolutePath() + File.separator + image.getOriginalFilename()));
+            image.transferTo(new File(getNewFullName(image.getOriginalFilename())));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,9 +50,8 @@ public class WriterImagesDaoImp implements WriterImagesDao {
             if (nameImage == null) {
                 nameImage = FilenameUtils.getName(url.getPath());
             }
-            String fullPath = getDirUpload().getAbsolutePath() + File.separator + nameImage;
             try (InputStream in = url.openStream()) {
-                Files.copy(in, Paths.get(fullPath), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(in, Paths.get(getNewFullName(nameImage)), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,9 +64,8 @@ public class WriterImagesDaoImp implements WriterImagesDao {
     }
 
     private void uploadBase64(Image image) {
-        File dirUpload = getDirUpload();
         byte[] decodedBytes = DatatypeConverter.parseBase64Binary(fixEncoded(image.getEncoded()));
-        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(dirUpload.getAbsoluteFile() + File.separator + image.getName()))) {
+        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(getNewFullName(image.getName())))) {
             outputStream.write(decodedBytes);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -74,8 +75,17 @@ public class WriterImagesDaoImp implements WriterImagesDao {
     }
 
 
-    private String getNameImage(URL url) {
-        return FilenameUtils.getName(url.getPath());
+    private synchronized String getNewFullName(String name) {
+        String newFullName = getDirUpload().getAbsolutePath() + File.separator + name;
+        File file = new File(newFullName);
+        int counter = 0;
+        while ((file.exists() || setImages.contains(newFullName))) {
+            counter++;
+            newFullName = getDirUpload().getAbsolutePath() + File.separator + "(" + counter + ")" + name;
+            file = new File(newFullName);
+        }
+        setImages.add(newFullName);
+        return newFullName;
     }
 
     private File getDirUpload() {

@@ -32,13 +32,12 @@ public class WriterImagesServiceImpl implements WriterImagesService {
 
     @Override
     public void upload(Image[] images) {
-        Arrays.asList(images).forEach(base64Image -> upload(base64Image));
+        Arrays.asList(images).parallelStream().forEach(base64Image -> upload(base64Image));
     }
 
     public WriterImagesDao getWriterImagesDao() {
         return writerImagesDao;
     }
-
 
     public void setWriterImagesDao(WriterImagesDao writerImagesDao) {
         this.writerImagesDao = writerImagesDao;

@@ -11,5 +11,4 @@ public interface WriterImagesService {
     void upload(Image image);
 
     void upload(Image[] images);
-
 }

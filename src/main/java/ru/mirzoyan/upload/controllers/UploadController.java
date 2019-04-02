@@ -20,13 +20,6 @@ public class UploadController {
         writerImagesService.upload(images);
     }
 
-
-/*    @PostMapping(path = "/upload", consumes = "application/x-www-form-urlencoded")
-    public void upload(
-            @RequestBody(required = false) String[] urls) {
-        writerImagesService.upload(urls);
-    }*/
-
     @PostMapping(path = "/upload", consumes = "application/json")
     public void upload(
             @RequestBody Image[] images) {

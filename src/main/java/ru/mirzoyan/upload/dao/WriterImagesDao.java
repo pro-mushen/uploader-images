@@ -7,5 +7,4 @@ public interface WriterImagesDao {
     void upload(MultipartFile image);
 
     void upload(Image image);
-
 }
