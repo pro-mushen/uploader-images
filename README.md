@@ -1,4 +1,4 @@
-# uploader-images
+# Технологии
 REST API реализован на JAVA 8 с использование фраемворка SPRIN BOOT.
 WEB интерфейс - VUE.js.
 Cистема автоматической сборки - Gradle.
