@@ -14,8 +14,6 @@ java -jar build/libs/gs-spring-boot-0.1.0.jar.
 
 #API
 
-Uploader
-
 По умаолчанию порт установлен 26001, его можно изменить в src/main/resources/application.properties параметр server.port.
 
 <host:port>/upload - загрузка изображений на сервер.
