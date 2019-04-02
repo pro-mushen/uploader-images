@@ -12,7 +12,7 @@ java -jar build/libs/gs-spring-boot-0.1.0.jar.
 
 Если не расматривать это приложение как тестовое задание, то можно собрать в WAR файл и сделать деплой, например, в Tomcat.
 
-#API
+# API
 
 По умаолчанию порт установлен 26001, его можно изменить в src/main/resources/application.properties параметр server.port.
 
