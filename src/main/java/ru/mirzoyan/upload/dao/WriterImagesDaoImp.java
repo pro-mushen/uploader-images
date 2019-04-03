@@ -79,7 +79,7 @@ public class WriterImagesDaoImp implements WriterImagesDao {
         String newFullName = getDirUpload().getAbsolutePath() + File.separator + name;
         File file = new File(newFullName);
         int counter = 0;
-        while ((file.exists() || setImages.contains(newFullName))) {
+        while (setImages.contains(newFullName) || file.exists()) {
             counter++;
             newFullName = getDirUpload().getAbsolutePath() + File.separator + "(" + counter + ")" + name;
             file = new File(newFullName);
