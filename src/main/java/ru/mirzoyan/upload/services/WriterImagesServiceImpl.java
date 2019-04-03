@@ -7,6 +7,7 @@ import ru.mirzoyan.upload.dao.WriterImagesDao;
 import ru.mirzoyan.upload.dao.pojo.Image;
 
 import java.util.Arrays;
+import java.util.List;
 
 
 @Service
@@ -31,8 +32,8 @@ public class WriterImagesServiceImpl implements WriterImagesService {
     }
 
     @Override
-    public void upload(Image[] images) {
-        Arrays.asList(images).parallelStream().forEach(base64Image -> upload(base64Image));
+    public void upload(List<Image> images) {
+        images.parallelStream().forEach(base64Image -> upload(base64Image));
     }
 
     public WriterImagesDao getWriterImagesDao() {
