@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 
 @Repository
@@ -24,13 +25,14 @@ public class WriterImagesDaoImp implements WriterImagesDao {
     private String pathUpload;
 
     private Set<String> setImages = new HashSet<>();
+    private static final Logger LOGGER = Logger.getLogger(WriterImagesDaoImp.class.getName());
 
     @Override
     public void upload(MultipartFile image) {
         try {
             image.transferTo(new File(getNewFullName(image.getOriginalFilename())));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
     }
 
@@ -53,12 +55,10 @@ public class WriterImagesDaoImp implements WriterImagesDao {
             try (InputStream in = url.openStream()) {
                 Files.copy(in, Paths.get(getNewFullName(nameImage)), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.warning(e.getMessage());
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
 
     }
@@ -67,10 +67,8 @@ public class WriterImagesDaoImp implements WriterImagesDao {
         byte[] decodedBytes = DatatypeConverter.parseBase64Binary(fixEncoded(image.getEncoded()));
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(getNewFullName(image.getName())))) {
             outputStream.write(decodedBytes);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
     }
 

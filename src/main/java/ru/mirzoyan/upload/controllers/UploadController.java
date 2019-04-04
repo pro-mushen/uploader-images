@@ -14,11 +14,13 @@ import ru.mirzoyan.upload.services.WriterImagesService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 public class UploadController {
 
     WriterImagesService writerImagesService;
+    private static final Logger LOGGER = Logger.getLogger(UploadController.class.getName());
 
     @PostMapping(path = "/upload", consumes = {"application/json", "multipart/form-data"})
     public void upload(@RequestParam(value = "fileMulti", required = false) MultipartFile[] multipartFiles, HttpServletRequest httpServletRequest) {
@@ -30,7 +32,7 @@ public class UploadController {
                 List<Image> images = new ObjectMapper().readValue(json, new TypeReference<List<Image>>() {});
                 writerImagesService.upload(images);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.warning(e.getMessage());
             }
         }
     }
